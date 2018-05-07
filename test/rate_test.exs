@@ -4,7 +4,8 @@ defmodule Puzzlenode01.Rates.RateTest do
   alias Puzzlenode01.Rates.Rate
 
   setup_all context do
-    {:ok, 
+    {
+      :ok, 
       rate:    %Rate{from: "A", to: "B", conversion: 0.5}, 
       inverse: %Rate{from: "B", to: "A", conversion: 2.0}
     }
