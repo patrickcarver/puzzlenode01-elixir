@@ -9,7 +9,7 @@ defmodule Puzzlenode01.Rates.XmlLoader do
     |> File.load()
     |> clean_data()
     |> parse_to_xml()
-    |> Enum.map(&Rate.create/1) 
+    |> create_rates()
   end
 
   defp clean_data(string) do
@@ -29,5 +29,9 @@ defmodule Puzzlenode01.Rates.XmlLoader do
           ])
 
     map.rates       
+  end
+
+  defp create_rates(list) do
+    Enum.map(list, &Rate.create/1)
   end
 end
