@@ -10,4 +10,12 @@ defmodule Puzzlenode01.Rates.RateTest do
 
     assert actual == expected
   end
+
+  test "create inverse rate from %Rate{from: A, to: B, conversion: 0.5}" do
+    rate = %Rate{from: "A", to: "B", conversion: 0.5}
+    actual = Rate.inverse(rate)
+    expected = %Rate{from: "B", to: "A", conversion: 2.0}
+
+    assert actual == expected
+  end
 end

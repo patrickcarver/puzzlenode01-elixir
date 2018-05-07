@@ -7,4 +7,8 @@ defmodule Puzzlenode01.Rates.Rate do
   def create(map) do
     %Rate{from: map.from, to: map.to, conversion: map.conversion}
   end
+
+  def inverse(rate) do
+    %Rate{from: rate.to, to: rate.from, conversion: (1 / rate.conversion)}
+  end
 end
