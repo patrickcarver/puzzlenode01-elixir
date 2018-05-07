@@ -22,6 +22,10 @@ defmodule Puzzlenode01.Rates.Rate do
     original_rate.to == candidate_rate.from
   end
 
+  def find_inverse(list, rate) do
+    Enum.find(list, &are_inverse?(&1, rate))
+  end
+
   defp inverse_conversion(conversion) do
     Rounding.call(1 / conversion)
   end

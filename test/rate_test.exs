@@ -28,4 +28,19 @@ defmodule Puzzlenode01.Rates.RateTest do
 
     assert actual == expected
   end
+
+  test "find inverse from list of rates" do
+    list = [
+      %Rate{from: "D", to: "C", conversion: 0.0},
+      %Rate{from: "B", to: "A", conversion: 0.0},
+      %Rate{from: "C", to: "D", conversion: 0.0}
+    ]
+
+    rate = %Rate{from: "A", to: "B", conversion: 0.0}
+
+    actual = Rate.find_inverse(list, rate)
+    expected = %Rate{from: "B", to: "A", conversion: 0.0}
+
+    assert actual == expected
+  end
 end
