@@ -17,7 +17,7 @@ defmodule Puzzlenode01.Rates.Rate do
     }
   end
 
-  def is_inverse?(original_rate, candidate_rate) do
+  def are_inverse?(original_rate, candidate_rate) do
     original_rate.from == candidate_rate.to && 
     original_rate.to == candidate_rate.from
   end
