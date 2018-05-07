@@ -18,4 +18,14 @@ defmodule Puzzlenode01.Rates.RateTest do
 
     assert actual == expected
   end
+
+  test "is %Rate{from: A, to: B} inverse of %Rate{from: B, to: A}" do
+    rate1 = %Rate{from: "A", to: "B", conversion: 0.5}
+    rate2 = %Rate{from: "B", to: "A", conversion: 2.0}
+
+    actual = Rate.is_inverse?(rate1, rate2)
+    expected = true
+
+    assert actual == expected
+  end
 end
