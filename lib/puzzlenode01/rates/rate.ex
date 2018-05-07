@@ -11,4 +11,5 @@ defmodule Puzzlenode01.Rates.Rate do
   def inverse(rate) do
     %Rate{from: rate.to, to: rate.from, conversion: (1 / rate.conversion)}
   end
+
 end
