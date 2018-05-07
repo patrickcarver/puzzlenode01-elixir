@@ -1,5 +1,6 @@
 defmodule Puzzlenode01.Rates.Rate do
   alias Puzzlenode01.Rates.Rate
+  alias Puzzlenode01.Rounding
 
   @enforce_keys [:from, :to, :conversion]
   defstruct(from: nil, to: nil, conversion: 0.0)
@@ -9,7 +10,15 @@ defmodule Puzzlenode01.Rates.Rate do
   end
 
   def inverse(rate) do
-    %Rate{from: rate.to, to: rate.from, conversion: (1 / rate.conversion)}
+    %Rate{
+      from: rate.to, 
+      to: rate.from, 
+      conversion: inverse_conversion(rate.conversion)
+    }
+  end
+
+  defp inverse_conversion(conversion) do
+    Rounding.call(1 / conversion)
   end
 
 end
