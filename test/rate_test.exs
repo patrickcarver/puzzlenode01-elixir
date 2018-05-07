@@ -3,43 +3,44 @@ defmodule Puzzlenode01.Rates.RateTest do
 
   alias Puzzlenode01.Rates.Rate
 
-  test "create rate from map %{from: A, to: B, conversion: 0.5}" do
+  setup_all context do
+    {:ok, 
+      rate:    %Rate{from: "A", to: "B", conversion: 0.5}, 
+      inverse: %Rate{from: "B", to: "A", conversion: 2.0}
+    }
+  end
+
+  test "create rate from map %{from: A, to: B, conversion: 0.5}", context do
     map = %{from: "A", to: "B", conversion: 0.5}
     actual = Rate.create(map)
-    expected = %Rate{from: "A", to: "B", conversion: 0.5}
+    expected = context[:rate]
 
     assert actual == expected
   end
 
-  test "create inverse rate from %Rate{from: A, to: B, conversion: 0.5}" do
-    rate = %Rate{from: "A", to: "B", conversion: 0.5}
-    actual = Rate.inverse(rate)
-    expected = %Rate{from: "B", to: "A", conversion: 2.0}
+  test "create inverse rate from %Rate{from: A, to: B, conversion: 0.5}", context do
+    actual = Rate.inverse(context[:rate])
+    expected = context[:inverse]
 
     assert actual == expected
   end
 
-  test "is %Rate{from: A, to: B} inverse of %Rate{from: B, to: A}" do
-    rate1 = %Rate{from: "A", to: "B", conversion: 0.5}
-    rate2 = %Rate{from: "B", to: "A", conversion: 2.0}
-
-    actual = Rate.are_inverse?(rate1, rate2)
+  test "is %Rate{from: A, to: B} inverse of %Rate{from: B, to: A}", context do
+    actual = Rate.are_inverse?(context[:rate], context[:inverse])
     expected = true
 
     assert actual == expected
   end
 
-  test "find inverse from list of rates" do
+  test "find inverse from list of rates", context do
     list = [
       %Rate{from: "D", to: "C", conversion: 0.0},
-      %Rate{from: "B", to: "A", conversion: 0.0},
+      context[:inverse],
       %Rate{from: "C", to: "D", conversion: 0.0}
     ]
 
-    rate = %Rate{from: "A", to: "B", conversion: 0.0}
-
-    actual = Rate.find_inverse(list, rate)
-    expected = %Rate{from: "B", to: "A", conversion: 0.0}
+    actual = Rate.find_inverse(list, context[:rate])
+    expected = context[:inverse]
 
     assert actual == expected
   end
