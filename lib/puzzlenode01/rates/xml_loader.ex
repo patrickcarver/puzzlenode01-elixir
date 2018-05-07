@@ -2,11 +2,14 @@ defmodule Puzzlenode01.Rates.XmlLoader do
   import SweetXml
 
   alias Puzzlenode01.File
+  alias Puzzlenode01.Rates.Rate
 
   def call(file) do
     file
     |> File.load()
     |> clean_data()
+    |> parse_to_xml()
+    |> Enum.map(&Rate.create/1) 
   end
 
   defp clean_data(string) do
@@ -16,13 +19,15 @@ defmodule Puzzlenode01.Rates.XmlLoader do
   end
 
   defp parse_to_xml(string) do
-    string
-    |> parse()
-    |> xmap(rates: [
-      ~x[//rates/rate]l,
-      from: ~x[./from/text()]s,
-      to: ~x[./to/text()]s,
-      conversion: ~x[./conversion/text()]f
-    ])       
+    map = string
+          |> parse()
+          |> xmap(rates: [
+            ~x[//rates/rate]l,
+            from: ~x[./from/text()]s,
+            to: ~x[./to/text()]s,
+            conversion: ~x[./conversion/text()]f
+          ])
+
+    map.rates       
   end
 end
