@@ -2,7 +2,9 @@ defmodule Puzzlenode01Test do
   use ExUnit.Case
   doctest Puzzlenode01
 
-  test "greets the world" do
-    assert Puzzlenode01.hello() == :world
+  alias Puzzlenode01
+
+  test "run project" do
+    assert Puzzlenode01.run() == :ok
   end
 end
