@@ -17,8 +17,8 @@ defmodule Puzzlenode01.Rates.Graphs do
     {first, second} = head
 
     updated_graphs = graphs
-                     |> Map.put(:forward, first)
-                     |> Map.put(:reverse, second)
+                     |> Map.put(:forward, [first])
+                     |> Map.put(:reverse, [second])
 
     process(updated_graphs, tail)
   end
