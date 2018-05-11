@@ -5,7 +5,7 @@ defmodule Puzzlenode01.Rates.GraphsTest do
 
   test "create new struct" do
     actual = %Graphs{}
-    expected = %Graphs{forward: [], reverse: [], known_rates: []}
+    expected = %Graphs{forward: [], reverse: []}
 
     assert actual == expected
   end

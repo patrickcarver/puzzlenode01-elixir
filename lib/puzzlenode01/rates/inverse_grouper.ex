@@ -11,6 +11,7 @@ defmodule Puzzlenode01.Rates.InverseGrouper do
 
   def process([rate | tail], inverses) do
     inverse_rate = Rate.find_inverse(tail, rate)
+
     updated_inverses = [{rate, inverse_rate} | inverses]
     updated_rates = List.delete(tail, inverse_rate)
 
