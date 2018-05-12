@@ -46,11 +46,11 @@ defmodule Puzzlenode01.Rates.Graphs do
   end
 
   def update_graphs(graphs, rate, {selected, :front}) do
-    Map.put(graphs, selected, [rate | graphs[selected]])
+    Map.put(graphs, selected, [rate | Map.get(graphs, selected)])
   end
 
   def update_graphs(graphs, rate, {selected, :back}) do
-    Map.put(graphs, selected, graphs[selected] ++ [rate])
+    Map.put(graphs, selected, Map.get(graphs, selected) ++ [rate])
   end
 
   def update_graphs(graphs, _, {_, nil}) do
